@@ -1,35 +1,49 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
+import {
+  FormControl,
+  FormLabel,
+  FormErrorMessage,
+  Input,
+  Button,
+} from "@chakra-ui/react";
 
 export const FormComponent = () => {
   const [form, setForm] = useState({
-    task: "",
+    task: "aaa",
   });
+
+  const inputRef = useRef();
 
   const { task } = form;
 
   const handleInputChange = ({ target }) => {
-    const { name } = target;
+    const { task } = target;
+
     setForm({
       ...form,
       [name]: value,
     });
   };
 
+  const onClick = () => {
+    console.log(inputRef);
+  };
+
   return (
     <>
-      <form action="submit">
-        <label htmlFor="task">
-          <input
-            type="text"
-            name="task"
-            id="task-input"
-            value={task}
-            onChange={handleInputChange}
-          />
-        </label>
-        <button type="submit">Agregar tarea</button>
-        <button type="submit">Eliminar lista</button>
-      </form>
+      <FormControl>
+        <FormLabel>Tarea</FormLabel>
+        <Input
+          type="text"
+          value={task}
+          name="task"
+          onChange={handleInputChange}
+          ref={inputRef}
+        />
+
+        <Button onClick={onClick}>Agregar Tarea</Button>
+        <Button>Eliminar Lista</Button>
+      </FormControl>
     </>
   );
 };
