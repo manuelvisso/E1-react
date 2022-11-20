@@ -9,15 +9,17 @@ import {
 
 export const FormComponent = () => {
   const [form, setForm] = useState({
-    task: "aaa",
+    task: "",
   });
 
-  const inputRef = useRef();
+  const taskRef = useRef();
 
   const { task } = form;
 
-  const handleInputChange = ({ target }) => {
-    const { task } = target;
+  //   const task = taskRef.current.value;
+
+  const handleInputChange = ({}) => {
+    const { name } = taskRef.current.value;
 
     setForm({
       ...form,
@@ -26,7 +28,7 @@ export const FormComponent = () => {
   };
 
   const onClick = () => {
-    console.log(inputRef);
+    console.log(taskRef.current.value);
   };
 
   return (
@@ -38,7 +40,7 @@ export const FormComponent = () => {
           value={task}
           name="task"
           onChange={handleInputChange}
-          ref={inputRef}
+          ref={taskRef}
         />
 
         <Button onClick={onClick}>Agregar Tarea</Button>
